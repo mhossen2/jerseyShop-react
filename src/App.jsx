@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import OrderSummary from './components/OrderSummary.jsx'
+import ProductGrid from './components/ProductGrid.jsx'
 
 function App() {
   const shopName = 'Jersey Shop Made with React JS'
 
-  const [items, setItems] = useState([
+  const [items] = useState([
     {
       id: 1,
       photo: 'real_madrid.webp',
@@ -89,51 +91,8 @@ function App() {
 
   return (
     <>
-      <section className="items">
-        <h4>{shopName}</h4>
-
-        {items.map((item) => (
-          <div key={item.name} className={`product`}>
-            <div className="photo">
-              <img src={'./img/' + item.photo} />
-            </div>
-            <div className="description">
-              <span className="name">{item.name}</span>
-              <span className="price">$ {item.price}</span>
-              {item.isInBag && (
-                <div className="quantity-area">
-                  <button disabled={item.quantity <= 1}>-</button>
-                  <span className="quantity">{item.quantity}</span>
-                  <button>+</button>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <section className="summary">
-        <strong>Order Summary</strong>
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1x --</td>
-              <td>$ --</td>
-            </tr>
-
-            <tr>
-              <th>Total</th>
-              <th>$ --</th>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <ProductGrid shopName={shopName} items={items} />
+      <OrderSummary />
     </>
   )
 }
