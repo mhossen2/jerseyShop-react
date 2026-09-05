@@ -1,4 +1,13 @@
+import { useAppContext } from '../context/useAppContext.js'
+
 function OrderSummary() {
+  const { items } = useAppContext()
+  const basketItems = items.filter((item) => item.isInBag)
+  const orderTotal = basketItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  )
+
   return (
     <section className="summary">
       <strong>Order Summary</strong>
@@ -10,14 +19,24 @@ function OrderSummary() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1x --</td>
-            <td>$ --</td>
-          </tr>
+          {basketItems.length === 0 ? (
+            <tr>
+              <td colSpan="2">Your basket is empty</td>
+            </tr>
+          ) : (
+            basketItems.map((item) => (
+              <tr key={item.id}>
+                <td>
+                  {item.quantity}x {item.name}
+                </td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
+              </tr>
+            ))
+          )}
 
           <tr>
             <th>Total</th>
-            <th>$ --</th>
+            <th>${orderTotal.toFixed(2)}</th>
           </tr>
         </tbody>
       </table>
