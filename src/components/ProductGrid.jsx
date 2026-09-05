@@ -2,7 +2,8 @@ import { useAppContext } from '../context/useAppContext.js'
 import ProductCard from './ProductCard.jsx'
 
 function ProductGrid() {
-  const { shopName, items, toggleItemInBag } = useAppContext()
+  const { shopName, items, toggleItemInBag, updateItemQuantity } =
+    useAppContext()
 
   return (
     <section className="items">
@@ -13,6 +14,7 @@ function ProductGrid() {
           key={item.id}
           item={item}
           onToggleBag={() => toggleItemInBag(item.id)}
+          onChangeQuantity={(amount) => updateItemQuantity(item.id, amount)}
         />
       ))}
     </section>

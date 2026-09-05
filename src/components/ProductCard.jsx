@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function ProductCard({ item, onToggleBag }) {
+function ProductCard({ item, onToggleBag, onChangeQuantity }) {
   return (
     <div
       className={`product${item.isInBag ? ' selected' : ''}`}
@@ -22,9 +22,24 @@ function ProductCard({ item, onToggleBag }) {
         <span className="price">$ {item.price}</span>
         {item.isInBag && (
           <div className="quantity-area">
-            <button disabled={item.quantity <= 1}>-</button>
+            <button
+              disabled={item.quantity <= 1}
+              onClick={(event) => {
+                event.stopPropagation()
+                onChangeQuantity(-1)
+              }}
+            >
+              -
+            </button>
             <span className="quantity">{item.quantity}</span>
-            <button>+</button>
+            <button
+              onClick={(event) => {
+                event.stopPropagation()
+                onChangeQuantity(1)
+              }}
+            >
+              +
+            </button>
           </div>
         )}
       </div>
@@ -41,6 +56,7 @@ ProductCard.propTypes = {
     quantity: PropTypes.number.isRequired,
   }).isRequired,
   onToggleBag: PropTypes.func.isRequired,
+  onChangeQuantity: PropTypes.func.isRequired,
 }
 
 export default ProductCard

@@ -98,8 +98,20 @@ function AppProvider({ children }) {
     )
   }
 
+  const updateItemQuantity = (itemId, amount) => {
+    setItems((currentItems) =>
+      currentItems.map((item) =>
+        item.id === itemId
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item,
+      ),
+    )
+  }
+
   return (
-    <AppContext.Provider value={{ shopName, items, setItems, toggleItemInBag }}>
+    <AppContext.Provider
+      value={{ shopName, items, setItems, toggleItemInBag, updateItemQuantity }}
+    >
       {children}
     </AppContext.Provider>
   )
