@@ -87,46 +87,13 @@ function App() {
     },
   ])
 
-  const addToBag = (id) => {
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === id ? { ...item, isInBag: true } : item,
-      ),
-    )
-  }
-
-  const changeQuantity = (id, amount) => {
-    setItems((currentItems) =>
-      currentItems.map((item) => {
-        if (item.id !== id) {
-          return item
-        }
-
-        return {
-          ...item,
-          quantity: Math.max(1, item.quantity + amount),
-        }
-      }),
-    )
-  }
-
-  const bagItems = items.filter((item) => item.isInBag)
-  const orderTotal = bagItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  )
-
   return (
     <>
       <section className="items">
         <h4>{shopName}</h4>
 
         {items.map((item) => (
-          <div
-            key={item.id}
-            className={`product${item.isInBag ? ' selected' : ''}`}
-            onClick={() => addToBag(item.id)}
-          >
+          <div key={item.name} className={`product`}>
             <div className="photo">
               <img src={'./img/' + item.photo} />
             </div>
@@ -135,24 +102,9 @@ function App() {
               <span className="price">$ {item.price}</span>
               {item.isInBag && (
                 <div className="quantity-area">
-                  <button
-                    disabled={item.quantity <= 1}
-                    onClick={(event) => {
-                      event.stopPropagation()
-                      changeQuantity(item.id, -1)
-                    }}
-                  >
-                    -
-                  </button>
+                  <button disabled={item.quantity <= 1}>-</button>
                   <span className="quantity">{item.quantity}</span>
-                  <button
-                    onClick={(event) => {
-                      event.stopPropagation()
-                      changeQuantity(item.id, 1)
-                    }}
-                  >
-                    +
-                  </button>
+                  <button>+</button>
                 </div>
               )}
             </div>
@@ -170,22 +122,14 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {bagItems.length === 0 && (
-              <tr>
-                <td colSpan="2">Your basket is empty</td>
-              </tr>
-            )}
-            {bagItems.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  {item.quantity}x {item.name}
-                </td>
-                <td>$ {(item.price * item.quantity).toFixed(2)}</td>
-              </tr>
-            ))}
+            <tr>
+              <td>1x --</td>
+              <td>$ --</td>
+            </tr>
+
             <tr>
               <th>Total</th>
-              <th>$ {orderTotal.toFixed(2)}</th>
+              <th>$ --</th>
             </tr>
           </tbody>
         </table>
