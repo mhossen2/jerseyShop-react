@@ -1,8 +1,19 @@
 import PropTypes from 'prop-types'
 
-function ProductCard({ item }) {
+function ProductCard({ item, onToggleBag }) {
   return (
-    <div className="product">
+    <div
+      className={`product${item.isInBag ? ' selected' : ''}`}
+      onClick={onToggleBag}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onToggleBag()
+        }
+      }}
+      role="button"
+      tabIndex="0"
+    >
       <div className="photo">
         <img src={'./img/' + item.photo} alt={item.name} />
       </div>
@@ -29,6 +40,7 @@ ProductCard.propTypes = {
     isInBag: PropTypes.bool.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
+  onToggleBag: PropTypes.func.isRequired,
 }
 
 export default ProductCard

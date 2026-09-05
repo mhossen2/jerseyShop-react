@@ -90,8 +90,16 @@ function AppProvider({ children }) {
   const [items, setItems] = useState(initialItems)
   const shopName = 'Jersey Shop Made with React JS'
 
+  const toggleItemInBag = (itemId) => {
+    setItems((currentItems) =>
+      currentItems.map((item) =>
+        item.id === itemId ? { ...item, isInBag: !item.isInBag } : item,
+      ),
+    )
+  }
+
   return (
-    <AppContext.Provider value={{ shopName, items, setItems }}>
+    <AppContext.Provider value={{ shopName, items, setItems, toggleItemInBag }}>
       {children}
     </AppContext.Provider>
   )
