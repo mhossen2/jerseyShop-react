@@ -1,7 +1,92 @@
-import PropTypes from 'prop-types'
 import ProductCard from './ProductCard.jsx'
 
-function ProductGrid({ shopName, items }) {
+const shopName = 'Jersey Shop Made with React JS'
+
+const items = [
+  {
+    id: 1,
+    photo: 'real_madrid.webp',
+    name: 'Real Madrid',
+    price: 119.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 2,
+    photo: 'milan.png',
+    name: 'Milan',
+    price: 99.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 3,
+    photo: 'chelsea.webp',
+    name: 'Chelsea',
+    price: 99.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 4,
+    photo: 'barcelona.png',
+    name: 'Barcelona',
+    price: 109.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 5,
+    photo: 'benfica.png',
+    name: 'Benfica',
+    price: 89.49,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 6,
+    photo: 'manchester.webp',
+    name: 'Manchester City',
+    price: 129.79,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 7,
+    photo: 'bayern.webp',
+    name: 'Bayern',
+    price: 119.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 8,
+    photo: 'psg.png',
+    name: 'PSG',
+    price: 94.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+  {
+    id: 9,
+    photo: 'ajax.webp',
+    name: 'Ajax',
+    price: 89.99,
+    active: false,
+    quantity: 1,
+    isInBag: false,
+  },
+]
+
+function ProductGrid() {
   return (
     <section className="items">
       <h4>{shopName}</h4>
@@ -11,11 +96,6 @@ function ProductGrid({ shopName, items }) {
       ))}
     </section>
   )
-}
-
-ProductGrid.propTypes = {
-  shopName: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default ProductGrid
